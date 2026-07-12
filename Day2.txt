@@ -1,0 +1,43 @@
+Day 2: Fix a Broken JupyterLab Server Configuration
+
+1. Activate the virtual environment.
+source /root/code/ml-env/bin/activate
+
+
+2. Inspect the existing configuration.
+cat /root/code/jupyter_lab_config.py
+
+
+
+3. Correct the three settings.
+sed -i "s|c.ServerApp.root_dir = '/root/wrong-path'|c.ServerApp.root_dir = '/root/notebooks'|" /root/code/jupyter_lab_config.py
+sed -i "s|c.ServerApp.port = 8000|c.ServerApp.port = 8888|" /root/code/jupyter_lab_config.py
+sed -i "s|c.ServerApp.ip = '1.1.1.1'|c.ServerApp.ip = '0.0.0.0'|" /root/code/jupyter_lab_config.py
+
+
+
+
+
+4. Create the notebooks directory.
+mkdir -p /root/notebooks
+
+
+
+
+
+
+
+5. Start JupyterLab in the background.
+nohup jupyter lab --config=/root/code/jupyter_lab_config.py --allow-root --no-browser > /tmp/jupyter.log 2>&1 &
+
+
+
+
+
+
+
+
+6. Verify.
+curl -s -o /dev/null -w "%{http_code}\n" http://localhost:8888/lab
+grep -E "root_dir|ServerApp.ip|ServerApp.port" /root/code/jupyter_lab_config.py
+ls /root/notebooks/
