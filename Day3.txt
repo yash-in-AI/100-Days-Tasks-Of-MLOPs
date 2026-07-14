@@ -1,0 +1,14 @@
+1. Project directory mein jao
+cd /root/code/fraud-detection
+
+
+
+2. requirements.in ko edit karo
+scikit-learn
+mlflow
+pandas
+numpy
+
+
+3. Lockfile compile karo
+uv pip compile requirements.in -o requirements.txt
