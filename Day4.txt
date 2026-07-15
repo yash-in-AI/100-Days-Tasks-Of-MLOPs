@@ -1,0 +1,91 @@
+Step 1: Repository mein jao
+cd /root/code/fraud-detection
+
+
+Step 2: .gitignore banao
+cat > .gitignore <<EOF
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Trained models
+*.pkl
+
+# Environment files
+.env
+EOF
+
+
+
+
+
+Step 3: Tracked artifacts ko Git index se remove karo (disk se nahi)
+git rm -r --cached __pycache__ 2>/dev/null
+git rm -r --cached venv 2>/dev/null
+git rm -r --cached .ipynb_checkpoints 2>/dev/null
+git rm --cached *.pkl 2>/dev/null
+git rm --cached .env 2>/dev/null
+git rm --cached $(find . -name "*.pyc") 2>/dev/null
+
+
+
+
+
+
+
+
+
+
+
+
+Step 4: Check karo
+git status
+
+
+
+
+
+
+
+
+
+
+
+Step 5: Commit karo
+git add .gitignore
+git commit -m "Add .gitignore and stop tracking generated artifacts"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Verification
+git status
+
+
+
+
+
+
+
+
+
+
+Output ideally:
+On branch master
+nothing to commit, working tree clean
