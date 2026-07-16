@@ -2,5 +2,6 @@
 - Day 2: Fix a Broken JupyterLab Server Configuration
 - Day 3: Fix a Broken uv Lockfile Specification
 - Day 4: Add a .gitignore and Untrack Committed Artifacts
+- Day 5: Fix a Broken ML Workflow Makefile
 
 
