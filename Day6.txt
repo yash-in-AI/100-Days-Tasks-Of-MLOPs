@@ -1,0 +1,96 @@
+Is task mein basic workflow ye hoga:
+cd /root/code/fraud-detection
+
+# Dekho kya errors aa rahe hain
+ruff check src/
+black --check src/
+
+
+
+
+
+
+
+
+
+
+1. pyproject.toml ko verify/fix karo
+Ensure karo ke configuration kuch is tarah ho:
+[tool.black]
+line-length = 120
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2. Ruff ke issues automatically fix karo
+ruff check src/ --fix
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3. Black se formatting karo
+black src/
+
+
+
+
+
+
+
+
+
+
+
+
+4. Dobara checks run karo
+ruff check src/
+black --check src/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Expected output:
+All checks passed!
+All done! ✨ 🍰 ✨
