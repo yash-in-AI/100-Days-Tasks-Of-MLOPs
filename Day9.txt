@@ -1,0 +1,223 @@
+The xFusionCorp Industries Machine Learning platform team maintains a Cookiecutter template from 
+which new ML projects are generated. 
+A draft template is available at /root/code/mlops-template/, but it currently does not render properly.
+Correct the template and use it to generate a new project.
+
+A Cookiecutter template exists at:
+/root/code/mlops-template/
+
+Cookiecutter is installed system-wide, and the template is visible in the VS Code explorer.
+
+Run:
+cookiecutter /root/code/mlops-template/
+
+to see how it currently fails to render.
+
+The end state must satisfy every one of the following:
+
+1. The cookiecutter.json declares four variables:
+   - project_name (default: my-ml-project)
+   - author (default: xFusionCorp)
+   - python_version (default: 3.11)
+   - ml_framework with the choices:
+     - sklearn
+     - pytorch
+     - tensorflow
+
+2. The generated requirements.txt logic:
+   - Contains scikit-learn when ml_framework is sklearn
+   - Contains torch when ml_framework is pytorch
+   - Contains tensorflow when ml_framework is tensorflow
+
+3. The generated README.md content:
+   - Must reference both the project_name and the author from Cookiecutter variables.
+
+4. The template directory structure:
+   {{cookiecutter.project_name}}/
+
+   Must contain:
+
+   Files:
+   - README.md
+   - requirements.txt
+
+   Directories:
+   - data/
+   - models/
+   - src/
+   - tests/
+
+5. A project generated from the corrected template at:
+   /root/code/churn-model/
+
+   with:
+   - project_name = churn-model
+   - ml_framework = sklearn
+
+   must contain:
+   - a requirements.txt listing scikit-learn
+   - a README.md that mentions xFusionCorp
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ----------------------------- > Task Solution < -------------------------------------
+   1. Go to the Template Directory
+   cd /root/code/mlops-template
+
+
+
+
+
+
+
+
+
+2. Create/Edit cookiecutter.json
+vim cookiecutter.json
+Paste:
+    {
+  "project_name": "my-ml-project",
+  "author": "xFusionCorp",
+  "python_version": "3.11",
+  "ml_framework": [
+    "sklearn",
+    "pytorch",
+    "tensorflow"
+  ]
+}
+
+
+
+
+
+
+
+
+3. Create the Template Directory Structure
+mkdir -p "{{cookiecutter.project_name}}"/{data,models,src,tests}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4. Create README.md
+touch "{{cookiecutter.project_name}}/README.md"
+vim "{{cookiecutter.project_name}}/README.md"
+Paste:
+    # {{ cookiecutter.project_name }}
+
+Author: {{ cookiecutter.author }}
+
+This machine learning project was generated using the xFusionCorp Cookiecutter template.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5. Create requirements.txt
+touch "{{cookiecutter.project_name}}/requirements.txt"
+vim "{{cookiecutter.project_name}}/requirements.txt"
+Paste:
+    {% if cookiecutter.ml_framework == "sklearn" %}
+scikit-learn
+{% elif cookiecutter.ml_framework == "pytorch" %}
+torch
+{% elif cookiecutter.ml_framework == "tensorflow" %}
+tensorflow
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+6. Generate the Project
+cookiecutter /root/code/mlops-template -o /root/code
+Enter:
+    project_name: churn-model
+    author: xFusionCorp
+    python_version: 3.11
+    ml_framework: sklearn
+
+
+
+
+
+
+
+
+
+
+
+7. Verify the Generated Project
+ls /root/code/churn-model
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+8. Verify requirements.txt
+cat /root/code/churn-model/requirements.txt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+9. Verify README.md
+cat /root/code/churn-model/README.md
