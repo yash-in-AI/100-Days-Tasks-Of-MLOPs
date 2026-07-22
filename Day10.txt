@@ -1,0 +1,145 @@
+The xFusionCorp Industries ML team is implementing
+DVC to ensure that datasets and model files are
+versioned independently from the codebase.
+Initialize DVC within the existing Git repository
+located at /root/code/fraud-detection/ and record
+this initialization in Git.
+
+A Git repository already exists at
+/root/code/fraud-detection/ with an initial commit.
+
+Acceptance criteria:
+
+- DVC is initialised inside that repository, so the
+  standard .dvc/ control directory and .dvcignore
+  file exist alongside the existing Git working
+  tree.
+
+- Every file DVC produces during initialisation is
+  recorded in a new Git commit with the message
+  "Initialize DVC".
+
+- Once initialisation is complete, the DVC
+  extension will detect the new .dvc/ directory
+  and surface the DVC TRACKED section in the
+  EXPLORER panel together with a DVC indicator
+  in the bottom status bar.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Task Solution :
+1. Go to the repository
+cd /root/code/fraud-detection
+
+
+
+
+
+
+
+
+
+
+2. Initialize DVC
+dvc init
+
+
+
+
+
+
+
+
+
+3. Check generated files
+ls -la .dvc
+ls -la .dvcignore
+
+
+
+
+
+
+
+
+
+
+4. Check Git status
+git status
+
+
+
+
+
+
+
+
+
+
+
+
+
+5. Add all DVC initialization files to Git
+git add .dvc .dvcignore
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+6. Commit the DVC initialization
+git commit -m "Initialize DVC"
+
+
+
+
+
+
+
+
+
+
+7. Verify the commit
+git log -1 --oneline
+You should see a commit similar to:
+        <commit-id> Initialize DVC
+
+
+
+
+
+
+
+
+
+8. Final verification
+git status
