@@ -8,6 +8,7 @@
 - Day 8: Fix a Broken pre-commit Configuration
 - Day 9: Fix a Broken Cookiecutter Template for ML Projects
 - Day 10: Initialize DVC in an Existing Git Repository
+- Day 11: Track a Dataset with DVC
 
 
 
