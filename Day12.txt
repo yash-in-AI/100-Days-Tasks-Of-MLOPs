@@ -1,0 +1,127 @@
+The xFusionCorp Industries ML team uses SeaweedFS as the shared S3-compatible object store for DVC-tracked data.
+A .dvc/config already declares a remote called s3 for the fraud-detection project, but dvc push currently fails. 
+Correct the configuration and push the tracked data into the SeaweedFS bucket.
+
+
+A project exists at /root/code/fraud-detection/ with DVC initialised and data/raw/transactions.csv already tracked.
+
+
+SeaweedFS is already running on the controlplane:
+
+S3 endpoint: http://localhost:8333
+Filer UI: open the SeaweedFS Filer button at the top of the lab (forwarded port 8888) – buckets 
+are visible under /buckets/.
+Credentials: weedadmin / weedadmin123 (already set in .dvc/config)
+Bucket name: dvc-storage (already created and visible in the Filer UI under /buckets/dvc-storage)
+Run dvc push to see it fail, then inspect .dvc/config against the endpoint, bucket, and credentials above.
+
+Acceptance criteria:
+
+The remote called s3 points at the dvc-storage bucket using s3://, uses the correct SeaweedFS S3 endpoint URL, 
+and is marked as the default remote.
+After the push, the dvc-storage bucket in the SeaweedFS Filer UI contains at least 
+one object under the files/md5/... prefix.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--- > Task solution :
+Go to Project:
+cd /root/code/fraud-detection
+
+
+
+
+
+
+
+
+
+Check DVC Remote:
+dvc remote list
+cat .dvc/config
+
+
+
+
+
+
+
+
+
+
+
+
+Fix S3 Remote:
+dvc remote modify s3 endpointurl http://localhost:8333
+dvc remote modify s3 url s3://dvc-storage
+dvc remote modify s3 --local access_key_id weedadmin
+dvc remote modify s3 --local secret_access_key weedadmin123
+dvc remote default s3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Verify Configuration:
+cat .dvc/config
+cat .dvc/config.local
+dvc remote list
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Push DVC Data:
+dvc push
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Verify DVC Status:
+dvc status

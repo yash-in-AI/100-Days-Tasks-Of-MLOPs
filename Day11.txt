@@ -29,28 +29,6 @@ it as a DVC-managed file.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 --------------- > Task solution :
 
 1. Navigate to the Repository
