@@ -10,6 +10,7 @@
 - Day 10: Initialize DVC in an Existing Git Repository
 - Day 11: Track a Dataset with DVC
 - Day 12: Fix a Broken DVC Remote and Push to SeaweedFS
+- Day 13: Day 13: Pull DVC-Tracked Data from Remote
 
 
 
