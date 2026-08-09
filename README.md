@@ -13,6 +13,8 @@
 - Day 13: Pull DVC-Tracked Data from Remote
 - Day 14: Create a DVC Pipeline for Data Processing
 - Day 15: Parameterize a DVC Pipeline
+- Day 16: Track ML Metrics with DVC
+
 
 
 

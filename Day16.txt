@@ -1,0 +1,190 @@
+After training a model, the xFusionCorp Industries ML team requires DVC to surface model metrics 
+through dvc metrics show. Although the fraud-detection pipeline successfully trains a 
+model and generates a metrics.json file, DVC currently does not recognize this file as a metric. 
+Ensure that the metrics.json file is properly configured to be recognized by DVC.
+
+
+A project exists at /root/code/fraud-detection/ with a three-stage DVC
+ pipeline (process_data, split_data, train). The train stage runs src/models/train.py, 
+ which writes the model to models/model.pkl and metrics to metrics.json. 
+  not modify the Python files.
+
+Acceptance criteria:
+
+The train stage in dvc.yaml declares metrics.json as a DVC metric output 
+rather than a regular file output, with cache: false so the JSON lives in 
+Git for diff history rather than in the DVC cache.
+The pipeline has been reproduced so the metric registration takes effect, 
+and dvc metrics show reports the accuracy and f1_score values from metrics.json.
+Tip: once the metric is registered, dvc metrics diff compares its values across Git commits, 
+which is useful when iterating on the model.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----- > Task Solution :
+1. Navigate to the Project Directory
+cd /root/code/fraud-detection
+
+
+
+2. Check the Existing Nano Process
+ps -p 2390
+
+
+
+
+3. Stop the Old Nano Process
+kill 2390
+
+
+
+
+4. Remove the Old Vim Swap File
+rm -f .dvc.yaml.swp
+
+
+
+
+
+5. Open dvc.yaml in Vim
+vim dvc.yaml
+
+
+
+
+
+
+6. Configure the train Stage
+
+Make sure the train stage contains:
+
+train:
+  cmd: python3 src/models/train.py
+  deps:
+    - data/processed/train.csv
+    - src/models/train.py
+  params:
+    - n_estimators
+  outs:
+    - models/model.pkl
+  metrics:
+    - metrics.json:
+        cache: false
+
+Save and exit Vim:
+
+Esc
+:wq
+Enter
+
+
+
+
+
+
+
+
+
+7. Check params.yaml
+cat params.yaml
+
+
+
+
+
+
+
+
+8. Add n_estimators to params.yaml
+
+If it is missing:
+
+vim params.yaml
+
+Add:
+
+n_estimators: 100
+
+Save and exit:
+
+Esc
+:wq
+Enter
+
+
+
+
+
+
+
+
+
+
+9. Verify the Parameter
+cat params.yaml
+
+
+
+
+
+
+
+
+10. Reproduce the DVC Pipeline
+dvc repro
+
+Expected:
+
+Running stage 'train':
+> python3 src/models/train.py
+> Metrics: {'accuracy': 1.0, 'f1_score': 1.0}
+11. Display the Model Metrics
+dvc metrics show
+
+Expected:
+
+Path          accuracy    f1_score
+metrics.json  1.0         1.0
+
+
+
+
+
+
+
+
+
+
+
+12. Final Verification
+
+The task is complete when:
+
+metrics.json → registered as DVC metric
+cache: false  → enabled
+dvc repro     → successful
+accuracy      → 1.0
+f1_score      → 1.0
+
+No Python files were modified.
