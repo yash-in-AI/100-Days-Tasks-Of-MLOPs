@@ -14,6 +14,7 @@
 - Day 14: Create a DVC Pipeline for Data Processing
 - Day 15: Parameterize a DVC Pipeline
 - Day 16: Track ML Metrics with DVC
+- Day 17: Day 17: Run and Compare DVC Experiments
 
 
 
