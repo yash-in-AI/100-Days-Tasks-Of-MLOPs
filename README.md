@@ -15,6 +15,8 @@
 - Day 15: Parameterize a DVC Pipeline
 - Day 16: Track ML Metrics with DVC
 - Day 17: Day 17: Run and Compare DVC Experiments
+- Day 18: Version Datasets and Models Across Git Branches
+
 
 
 
